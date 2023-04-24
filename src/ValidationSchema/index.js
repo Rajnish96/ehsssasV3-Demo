@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
 export const LoginSchema = Yup.object({
-  username: Yup.string().min(3).max(25).required("Please Enter Your Username"),
+  email: Yup.string().min(3).max(25).required("Please Enter Your email"),
   password: Yup.string().min(6).required("Please Enter Your Password"),
 });
 
@@ -212,10 +212,10 @@ export const RateMasterValidationSchema = Yup.object({
   Centre: Yup.string()
     .required("Please Enter your CentreName")
     .trim("The contact name cannot include leading and trailing spaces"),
-  UserName: Yup.string()
+  email: Yup.string()
     .min(3)
     .max(25)
-    .required("Please Enter Your Username")
+    .required("Please Enter Your email")
     .trim("The contact name cannot include leading and trailing spaces"),
 
   Password: Yup.string()

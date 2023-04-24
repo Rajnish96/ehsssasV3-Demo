@@ -9,11 +9,9 @@ import { LoginSchema } from "../../ValidationSchema";
 import Loading from "../util/Loading";
 
 const initialValues = {
-  username: "",
+  email: "",
   password: "",
 };
-
-
 
 const LoginForm = () => {
   const [load, setLoad] = useState(false);
@@ -23,10 +21,10 @@ const LoginForm = () => {
     onSubmit: (values, { resetForm }) => {
       setLoad(true);
       axios
-        .post("http://apis-dev.ehssasdigitech.com/v1/user/login", values)
+        .post("http://192.168.1.6:5000/v1/user/login", values)
         .then((res) => {
           console.log('res', res);
-          if (res.data.success) {
+          if (res.data) {
             window.sessionStorage.setItem("user_Token", res.data.token);
             window.location.replace("/advancedelements");
             toast.success("Login Successfully");
@@ -35,6 +33,8 @@ const LoginForm = () => {
           }
         })
         .catch((err) => {
+          console.log('err', err);
+
           toast.error(
             err.response.data.message
               ? err.response.data.message
@@ -62,8 +62,8 @@ const LoginForm = () => {
               type="text"
               className="form-control"
               placeholder="Email"
-              name="username"
-              value={values.username}
+              name="email"
+              value={values.email}
               onChange={handleChange}
               text="hello"
             />
@@ -72,8 +72,8 @@ const LoginForm = () => {
               className="fa fa-user form-control-feedback"
               aria-hidden="true"
             ></i>
-            {errors?.username && touched?.username && (
-              <span className="golbal-Error">{errors?.username}</span>
+            {errors?.email && touched?.email && (
+              <span className="golbal-Error">{errors?.email}</span>
             )}
           </div>
           <div className="form-group has-feedback">
